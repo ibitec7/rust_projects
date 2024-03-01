@@ -1,0 +1,28 @@
+
+**SMART POINTERS IN RUST**:
+*General:
+-> Box:
+Simple smart pointer that is a safer way of using smart pointers. Memory is deallocated automatically when
+pointer goes out of scope or the pointer is droped intentionally using drop().
+
+*Single Threaded Context:
+-> Rc (Reference Counting)
+Allows multiple owners to the data by keeping count of the references to that data. Catch is all the
+references are immutable so the data can not be changed for safety. increment/create another reference to
+the data using Rc::clone(&rc) where rc is the original reference to the data rc = Rc::new(76). Memory
+deallocated when Rc count reaches 0. know Rc count by using Rc::strong_count(&rc).
+
+-> Ref-Cell
+Allows you to mutate an immutable reference by using something known as interior mutability. Idea is that
+the borrow checker is delayed to work at Run-Time rather than at compile time. So allows you to mutate data
+as long as borrow rules followed at the time ie: either one mutable borrow or multiple immutable borrows
+
+
+*Muti-threaded Context:
+-> Arc (Atomic Reference Counting)
+Similar to Rc in single threaded context but uses some measure in backend to allow safety in multi-threaded
+contexts.
+
+-> Mutex (Mutual Exclusion)
+-> RwLock (Read write lock)
+
